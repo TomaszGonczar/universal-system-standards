@@ -1,26 +1,34 @@
 # USS-006 — Knowledge Freshness & Reference Integrity
 
-**Status:** Draft specification derived from ratified workshop decision; Operator approval required before normative release.
+**Status:** Normative Standard  
+**Cluster:** Cluster 3 (Hygiene, Freshness & Dependencies)  
+**Authority:** The Operator (Product Owner)
 
-**Purpose:** Keep references and instructions aligned with actual systems.
+---
 
-## Rules
-1. **006-01** — Trigger targeted integrity checks after relevant changes.
-2. **006-02** — Run periodic review for drift not covered by event checks.
-3. **006-03** — Age alone does not prove documentation is stale.
-4. **006-04** — Use existing Git and filesystem references before introducing graph infrastructure.
-5. **006-05** — Semantic changes to protected documentation require appropriate approval.
+## Purpose
 
-## Prohibited
-- Do not auto-rewrite architectural meaning based on guesses.
-- Do not scan all content on every trivial edit.
+Maintain accurate alignment between documentation, architectural decisions, and actual system implementations while avoiding spurious invalidation.
 
-## Defaults and limits
-- Apply risk-proportionate limits. See `governance/DEFAULTS_AND_TOKEN_BUDGETS.md`. Proposed numbers are **not ratified**.
-- Exceptions require explicit rationale and appropriate authorization.
+---
+
+## Normative Rules
+
+1. **006-01** — Systems **MUST** trigger targeted reference integrity checks whenever dependent files, schemas, or API definitions are modified.
+2. **006-02** — Systems **SHOULD** schedule periodic reviews to identify architectural drift not captured by event-driven checks.
+3. **006-03** — Verification tools **MUST NOT** treat documentation as stale or obsolete based solely on file age, commit date, or calendar intervals.
+4. **006-04** — Systems **MUST** utilize native Git history and filesystem references before introducing external knowledge graph or database infrastructure.
+5. **006-05** — Semantic modifications to protected architectural specifications **MUST** require authorization under Level 3 or Level 4 gates.
+
+---
+
+## Prohibitions
+
+- Automated agents **MUST NOT** rewrite architectural intent or modify normative rules based on speculative inferences.
+- Tooling **MUST NOT** trigger global repository validation scans on every trivial edit when targeted dependency checks suffice.
+
+---
 
 ## Verification
-Change a referenced file and verify the targeted drift check detects it.
 
-## Related
-See `governance/BOUNDARIES_AND_SSOT.md` for cross-standard ownership.
+A compliant system **MUST** modify a referenced file and demonstrate that targeted reference integrity checks detect and report the resulting drift.

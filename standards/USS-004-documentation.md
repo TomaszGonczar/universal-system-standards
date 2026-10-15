@@ -1,27 +1,35 @@
 # USS-004 — Modular Documentation & Context Economy
 
-**Status:** Draft specification derived from ratified workshop decision; Operator approval required before normative release.
+**Status:** Normative Standard  
+**Cluster:** Cluster 1 (Foundation & Governance)  
+**Authority:** The Operator (Product Owner)
 
-**Purpose:** Keep documentation concise, navigable and token-efficient.
+---
 
-## Rules
-1. **004-01** — USS.md is an index and governance entrypoint, not a duplicated specification.
-2. **004-02** — One canonical definition per normative rule; link instead of copying.
-3. **004-03** — One coherent concern per document; split only when it improves retrieval or maintenance.
-4. **004-04** — Load only task-relevant documents into agent context; use progressive disclosure.
-5. **004-05** — Use concise imperative requirements, explicit scope, exceptions and verification.
-6. **004-06** — Keep machine-readable schemas separate only when genuinely required.
+## Purpose
 
-## Prohibited
-- Do not create AGENTS.md copies throughout a tree without distinct scope.
-- Do not treat proposed token budgets as universal hard caps.
+Maintain concise, navigable, and token-efficient documentation across systems while avoiding duplication and arbitrary length constraints.
 
-## Defaults and limits
-- Apply risk-proportionate limits. See `governance/DEFAULTS_AND_TOKEN_BUDGETS.md`. Proposed numbers are **not ratified**.
-- Exceptions require explicit rationale and appropriate authorization.
+---
+
+## Normative Rules
+
+1. **004-01** — `INDEX.md` **MUST** serve as the progressive disclosure index and governance entrypoint, rather than duplicating complete normative specification text.
+2. **004-02** — Each normative rule **MUST** have exactly one canonical definition; documents **MUST** link to canonical rule definitions rather than copying text.
+3. **004-03** — Each standard document **MUST** address one coherent concern and **SHOULD** split into modular files only when modularity improves retrieval or maintenance.
+4. **004-04** — Agents **SHOULD** load only task-relevant documents into active working memory, practicing progressive disclosure.
+5. **004-05** — Standards and agent instructions **MUST** use concise imperative requirements, explicit scope boundaries, and verifiable acceptance criteria.
+6. **004-06** — Machine-readable schemas **SHOULD** be separated from narrative prose only when programmatic validation or automated tooling genuinely requires it.
+
+---
+
+## Prohibitions
+
+- Repositories **MUST NOT** duplicate identical `AGENTS.md` instructions throughout subdirectories; nested files **MUST** specify localized deltas only.
+- Systems **MUST NOT** enforce arbitrary numerical token budgets as universal hard caps on critical instructions or domain knowledge.
+
+---
 
 ## Verification
-Measure token estimates and validate index links, duplicate rule IDs and scope.
 
-## Related
-See `governance/BOUNDARIES_AND_SSOT.md` for cross-standard ownership.
+A compliant repository **MUST** validate that all internal document links resolve, rule IDs are globally unique, and progressive disclosure links operate correctly.

@@ -1,27 +1,35 @@
 # USS-012 — Tiered Observability
 
-**Status:** Draft specification derived from ratified workshop decision; Operator approval required before normative release.
+**Status:** Normative Standard  
+**Cluster:** Cluster 4 (Reliability, Quality & Lifecycle)  
+**Authority:** The Operator (Product Owner)
 
-**Purpose:** Provide actionable health and event visibility without central telemetry by default.
+---
 
-## Rules
-1. **012-01** — Expose understandable operational status; distinguish HEALTHY, DEGRADED, BLOCKED, FAILED, IDLE and UNKNOWN.
-2. **012-02** — Record important task, failure, security and recovery events with correlation IDs where feasible.
-3. **012-03** — Collect cost and latency metrics when meaningful and available.
-4. **012-04** — Deduplicate alerts and escalate only actionable issues.
-5. **012-05** — Rotate and retain logs according to risk; redact sensitive data.
-6. **012-06** — Hermes receives distilled systemic observations, not all raw logs.
+## Purpose
 
-## Prohibited
-- No assumption that silence means healthy.
-- No default full-prompt or secret logging.
+Provide actionable health, event, and diagnostic visibility across agent systems without imposing a centralized telemetry daemon or cloud database.
 
-## Defaults and limits
-- Apply risk-proportionate limits. See `governance/DEFAULTS_AND_TOKEN_BUDGETS.md`. Proposed numbers are **not ratified**.
-- Exceptions require explicit rationale and appropriate authorization.
+---
+
+## Normative Rules
+
+1. **012-01** — Systems **MUST** expose operational status strictly using the standardized health tokens: `HEALTHY`, `DEGRADED`, `SYSTEM_BLOCKED` (runtime stalled awaiting external resource or manual unblock), `FAILED`, `IDLE`, or `UNKNOWN`.
+2. **012-02** — Systems **SHOULD** record structured audit events for task boundaries, security decisions, and recovery events, attaching correlation IDs across distributed operations where feasible.
+3. **012-03** — Systems **SHOULD** collect token consumption, monetary cost, and execution duration metrics when telemetry is programmatically accessible.
+4. **012-04** — Alert handlers **MUST** deduplicate recurring notifications and escalate only actionable operational failures.
+5. **012-05** — Systems **MUST** sanitize operational logs, redacting credentials, private keys, and sensitive prompts before persistence.
+6. **012-06** — Hermes **SHOULD** receive distilled, systemic observation summaries rather than exhaustive raw telemetry feeds.
+
+---
+
+## Prohibitions
+
+- Monitoring systems **MUST NOT** infer that silence or absence of telemetry indicates a `HEALTHY` state.
+- Systems **MUST NOT** persist raw API secrets, private keys, or unscrubbed model prompts in permanent log files.
+
+---
 
 ## Verification
-Diagnose a representative failure from status and event evidence.
 
-## Related
-See `governance/BOUNDARIES_AND_SSOT.md` for cross-standard ownership.
+A compliant system **MUST** simulate a stalled operational condition, verify that the health status correctly transitions to `SYSTEM_BLOCKED`, and confirm that diagnostic logs contain no exposed credentials.

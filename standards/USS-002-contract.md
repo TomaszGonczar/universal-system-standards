@@ -1,27 +1,35 @@
 # USS-002 — Canonical Contract, Local Projections & Controlled Pruning
 
-**Status:** Draft specification derived from ratified workshop decision; Operator approval required before normative release.
+**Status:** Normative Standard  
+**Cluster:** Cluster 1 (Foundation & Governance)  
+**Authority:** The Operator (Product Owner)
 
-**Purpose:** Maintain one canonical USS contract; allow independent local adoption and bounded cleanup.
+---
 
-## Rules
-1. **002-01** — The canonical approved USS release lives in versioned Git; a local system pins a tag or commit.
-2. **002-02** — Local projections must identify the adopted release and applicable rule IDs.
-3. **002-03** — Requirements describe outcomes; reference patterns are nonmandatory when equivalent evidence exists.
-4. **002-04** — Do not silently rewrite normative requirements in local projections.
-5. **002-05** — Pruning levels: P1 mechanical, P2 reversible structural, P3 validated noncritical semantic; protect SSOT and contracts.
-6. **002-06** — Keep local operations possible offline; a central always-on USS service is not required.
+## Purpose
 
-## Prohibited
-- Never auto-prune protected contracts or active recovery artifacts.
-- Never assume latest release equals adopted release.
+Maintain one canonical versioned USS contract in Git while enabling independent local system projections and bounded, safe cleanup.
 
-## Defaults and limits
-- Apply risk-proportionate limits. See `governance/DEFAULTS_AND_TOKEN_BUDGETS.md`. Proposed numbers are **not ratified**.
-- Exceptions require explicit rationale and appropriate authorization.
+---
+
+## Normative Rules
+
+1. **002-01** — The canonical approved USS release **MUST** live in versioned Git; a consuming system **MUST** pin a specific cryptographic tag or immutable commit hash.
+2. **002-02** — Local projections **MUST** identify the adopted release version and specify applicable rule IDs in their local adoption record.
+3. **002-03** — Normative requirements **MUST** describe testable outcomes; reference patterns in `patterns/` are nonmandatory when equivalent verifiable evidence is provided.
+4. **002-04** — Adopting systems **MUST NOT** silently rewrite or weaken normative requirements in local projections.
+5. **002-05** — Automated context and workspace pruning **MUST** be strictly limited to level P1 (mechanical formatting) and level P2 (reversible structural refactoring); level P3 (semantic modification) **MUST** require substantive authorization (Level 3/4); protected content (SSOT, contracts, recovery artifacts) **MUST NOT** be pruned autonomously.
+6. **002-06** — Local operations, standards checks, and builds **MUST** remain fully functional offline; a centralized always-on USS service **MUST NOT** be required.
+
+---
+
+## Prohibitions
+
+- Automated processes **MUST NOT** auto-prune protected contracts, active recovery artifacts, or Single Source of Truth records without explicit Operator approval.
+- Consuming systems **MUST NOT** assume that the latest published release equals their locally adopted release.
+
+---
 
 ## Verification
-Verify version pin, projection references and protected pruning gate.
 
-## Related
-See `governance/BOUNDARIES_AND_SSOT.md` for cross-standard ownership.
+A compliant system **MUST** provide a verifiable version pin in `SYSTEM_ADOPTION.md`, maintain explicit mapping of applicable rule IDs, and demonstrate that autonomous pruning is blocked on protected contract files.

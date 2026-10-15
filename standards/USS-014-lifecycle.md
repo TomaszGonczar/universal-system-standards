@@ -1,27 +1,35 @@
 # USS-014 — Controlled Lifecycle & Knowledge Handover
 
-**Status:** Draft specification derived from ratified workshop decision; Operator approval required before normative release.
+**Status:** Normative Standard  
+**Cluster:** Cluster 4 (Reliability, Quality & Lifecycle)  
+**Authority:** The Operator (Product Owner)
 
-**Purpose:** Manage system state, retirement and transfer of SSOT safely.
+---
 
-## Rules
-1. **014-01** — Register independent systems with owner, lifecycle state, documentation and adopted USS release.
-2. **014-02** — Use EXPERIMENTAL, ACTIVE, MAINTENANCE, MIGRATING, ARCHIVED and RETIRED consistently.
-3. **014-03** — Separate pause, archive, decommission, retire and delete.
-4. **014-04** — For material migration, classify knowledge ADOPT, ADAPT, REFERENCE or REJECT.
-5. **014-05** — Transfer authoritative write ownership only after verified cutover.
-6. **014-06** — Review jobs, integrations, credentials, state and recovery before decommission.
+## Purpose
 
-## Prohibited
-- No autonomous destructive retirement of active systems.
-- No implicit dual-write ownership.
+Manage system states throughout their operational lifecycle, ensuring safe transitions, clear ownership of Single Source of Truth, and secure decommissioning.
 
-## Defaults and limits
-- Apply risk-proportionate limits. See `governance/DEFAULTS_AND_TOKEN_BUDGETS.md`. Proposed numbers are **not ratified**.
-- Exceptions require explicit rationale and appropriate authorization.
+---
+
+## Normative Rules
+
+1. **014-01** — Independent systems **MUST** maintain a registration record documenting designated system owner, current lifecycle state, canonical documentation path, and pinned USS release version.
+2. **014-02** — System lifecycle states **MUST** report strictly using the standardized enum tokens: `PLANNED` (conceptualized prior to repository initialization), `EXPERIMENTAL`, `ACTIVE`, `MAINTENANCE`, `MIGRATING`, `ARCHIVED`, `RETIRED`, or `UNKNOWN`.
+3. **014-03** — Operational runbooks **MUST** maintain distinct procedures for pausing, archiving, decommissioning, retiring, and permanently purging system resources.
+4. **014-04** — During cross-system migrations or handovers, knowledge artifacts and codebases **MUST** be classified as `ADOPT`, `ADAPT`, `REFERENCE`, or `REJECT`.
+5. **014-05** — Authoritative write ownership of Single Source of Truth assets **MUST NOT** transition to a successor system until cutover verification is proven.
+6. **014-06** — Prior to formal decommissioning of any system, maintainers **MUST** audit and terminate all scheduled background jobs, revoke associated credentials, and verify archive integrity.
+
+---
+
+## Prohibitions
+
+- Autonomous agents **MUST NOT** initiate destructive retirement or resource purging on systems in `ACTIVE` or `MAINTENANCE` states without explicit Operator authorization.
+- Migrating systems **MUST NOT** permit concurrent, uncoordinated dual-write access to shared mutable operational datasets.
+
+---
 
 ## Verification
-Verify cutover and absence of leftover active jobs before retirement.
 
-## Related
-See `governance/BOUNDARIES_AND_SSOT.md` for cross-standard ownership.
+A compliant decommission process **MUST** demonstrate complete cutover verification, revoke operational credentials, and confirm the absence of lingering background scheduled tasks.

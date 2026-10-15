@@ -1,27 +1,35 @@
 # USS-007 — Risk-Adaptive Agent Orchestration
 
-**Status:** Draft specification derived from ratified workshop decision; Operator approval required before normative release.
+**Status:** Normative Standard  
+**Cluster:** Cluster 2 (Execution, Security & Orchestration)  
+**Authority:** The Operator (Product Owner)
 
-**Purpose:** Delegate only when justified and with bounded authority.
+---
 
-## Rules
-1. **007-01** — Each worker task specifies objective, scope, output, acceptance criteria, budget and permitted resources.
-2. **007-02** — Prefer one agent or deterministic script over a swarm for simple work.
-3. **007-03** — Select the cheapest sufficiently reliable model based on total accepted-result cost.
-4. **007-04** — Prevent uncontrolled concurrent writes to shared mutable resources.
-5. **007-05** — Limit retries, duration and cost according to risk; coordinator owns integration.
-6. **007-06** — Use independent review when consequence or uncertainty warrants it.
+## Purpose
 
-## Prohibited
-- No infinite delegation loops.
-- No permission escalation through delegation.
+Delegate tasks only when complexity or parallelism justifies it, maintaining bounded authority, resource limits, and deterministic coordinator integration.
 
-## Defaults and limits
-- Apply risk-proportionate limits. See `governance/DEFAULTS_AND_TOKEN_BUDGETS.md`. Proposed numbers are **not ratified**.
-- Exceptions require explicit rationale and appropriate authorization.
+---
+
+## Normative Rules
+
+1. **007-01** — Each delegated worker task **MUST** specify an explicit objective, bounded scope, expected output schema, measurable acceptance criteria, resource limits, and permitted tools.
+2. **007-02** — Orchestrators **SHOULD** prefer a single focused agent or deterministic script over a multi-agent swarm for simple, sequential, or localized work.
+3. **007-03** — When model selection and cost telemetry are programmatically accessible, systems **SHOULD** select the most cost-efficient sufficiently reliable model based on total accepted-result cost, referencing [patterns/cost-adaptive-routing.md](../patterns/cost-adaptive-routing.md).
+4. **007-04** — Orchestrators **MUST** prevent uncontrolled concurrent writes to shared mutable files or state through serialized waves, explicit locks, or isolated workspaces.
+5. **007-05** — Orchestrators **MUST** enforce bounded retries, execution timeouts, and cost limits scaled to risk; the coordinator agent **MUST** retain sole ownership of integration and acceptance.
+6. **007-06** — Substantive operations (Level 3) with significant uncertainty or cross-system consequences **SHOULD** undergo independent verification or review prior to acceptance.
+
+---
+
+## Prohibitions
+
+- Systems **MUST NOT** permit infinite, recursive, or unbounded delegation loops.
+- Delegated worker agents **MUST NOT** escalate execution privileges beyond the coordinator's authorized boundary.
+
+---
 
 ## Verification
-Inspect a worker task contract and evidence of integrated acceptance.
 
-## Related
-See `governance/BOUNDARIES_AND_SSOT.md` for cross-standard ownership.
+A compliant orchestrator **MUST** demonstrate a documented worker task contract with bounded resources and provide traceable evidence of coordinator review and acceptance.

@@ -1,26 +1,34 @@
 # USS-003 — Observations to Hermes
 
-**Status:** Draft specification derived from ratified workshop decision; Operator approval required before normative release.
+**Status:** Normative Standard  
+**Cluster:** Cluster 1 (Foundation & Governance)  
+**Authority:** The Operator (Product Owner)
 
-**Purpose:** Turn actionable system feedback into controlled USS improvement proposals.
+---
 
-## Rules
-1. **003-01** — Systems emit concise observations with source, symptom, evidence, impact and suggested action when known.
-2. **003-02** — Hermes deduplicates and groups recurring observations; raw telemetry stays with source systems.
-3. **003-03** — Hermes may draft changes and report findings, but cannot approve normative USS modifications.
-4. **003-04** — Keep observation provenance and distinguish facts from hypotheses.
-5. **003-05** — Do not introduce a dedicated observation agent or database by default.
+## Purpose
 
-## Prohibited
-- No automatic normative changes based solely on one observation.
-- No bulk prompt or secret ingestion into observation inbox.
+Capture actionable cross-system feedback and failure patterns to drive controlled, evidence-based improvements to Universal System Standards.
 
-## Defaults and limits
-- Apply risk-proportionate limits. See `governance/DEFAULTS_AND_TOKEN_BUDGETS.md`. Proposed numbers are **not ratified**.
-- Exceptions require explicit rationale and appropriate authorization.
+---
+
+## Normative Rules
+
+1. **003-01** — Consuming systems **SHOULD** emit actionable observations formatted according to [templates/OBSERVATION.template.md](../templates/OBSERVATION.template.md), documenting source system, symptom, observable evidence, impact, and suggested action. The default local drop location **SHOULD** be `observations/` within the consuming repository.
+2. **003-02** — Hermes **SHOULD** deduplicate and group recurring observations; raw operational telemetry, debug traces, and sensitive logs **MUST** remain localized within source systems.
+3. **003-03** — Hermes **MAY** draft change recommendations and report synthesis to the Operator, but **MUST NOT** approve normative USS modifications.
+4. **003-04** — Observation records **MUST** preserve provenance and explicitly distinguish verified factual evidence from diagnostic hypotheses.
+5. **003-05** — Implementations **MUST NOT** introduce a dedicated observation agent daemon or mandatory central database; observations **MUST** be transmitted via standard Git artifacts or lightweight Markdown file drops.
+
+---
+
+## Prohibitions
+
+- Systems **MUST NOT** apply normative standard modifications automatically based solely on an observation report.
+- Consuming systems **MUST NOT** ingest credentials, API keys, or bulk unscrubbed prompts into observation files.
+
+---
 
 ## Verification
-Trace an observation to a review outcome or explicit no-action decision.
 
-## Related
-See `governance/BOUNDARIES_AND_SSOT.md` for cross-standard ownership.
+A compliant system **MUST** demonstrate traceability from an emitted observation artifact to a recorded review outcome or an explicit, documented no-action decision.

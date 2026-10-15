@@ -1,26 +1,34 @@
 # USS-009 — Risk-Adaptive Recovery & Failure Handling
 
-**Status:** Draft specification derived from ratified workshop decision; Operator approval required before normative release.
+**Status:** Normative Standard  
+**Cluster:** Cluster 4 (Reliability, Quality & Lifecycle)  
+**Authority:** The Operator (Product Owner)
 
-**Purpose:** Make failures bounded, diagnosable and recoverable.
+---
 
-## Rules
-1. **009-01** — Use timeouts, bounded retries and backoff for transient failures.
-2. **009-02** — Reconcile unknown outcomes before retrying non-idempotent actions.
-3. **009-03** — Use durable checkpoints for long-running or critical workflows.
-4. **009-04** — Distinguish R1 basic, R2 recoverable and R3 critical reliability requirements.
-5. **009-05** — Test resume and failure handling; do not assume checkpoint code works.
+## Purpose
 
-## Prohibited
-- No unbounded retry loops.
-- No automatic duplicate external side effects after uncertain outcomes.
+Ensure system and agent failures are bounded, diagnosable, and safely recoverable without inducing state corruption or duplicate side-effects.
 
-## Defaults and limits
-- Apply risk-proportionate limits. See `governance/DEFAULTS_AND_TOKEN_BUDGETS.md`. Proposed numbers are **not ratified**.
-- Exceptions require explicit rationale and appropriate authorization.
+---
+
+## Normative Rules
+
+1. **009-01** — Systems **MUST** configure explicit execution timeouts, bounded retry limits, and exponential backoff for operations subject to transient failure.
+2. **009-02** — When an operation yields an indeterminate outcome, systems **MUST** reconcile system state before retrying non-idempotent operations.
+3. **009-03** — Long-running tasks, migrations, and multi-step workflows **MUST** record durable checkpoints at verifiable execution boundaries.
+4. **009-04** — Systems **MUST** scale recovery and reliability requirements to the unified risk matrix ([patterns/risk-matrix.md](../patterns/risk-matrix.md)), mandating verified rollback capabilities for Level 3 and Operator-supervised recovery for Level 4.
+5. **009-05** — Checkpoint resumption and rollback routines **MUST** be validated through automated test coverage; systems **MUST NOT** assume unverified recovery paths function during outages.
+
+---
+
+## Prohibitions
+
+- Systems **MUST NOT** execute unbounded retry loops without explicit backoff and maximum duration limits.
+- Automated runners **MUST NOT** replay external side-effect operations when previous execution status remains unknown or indeterminate.
+
+---
 
 ## Verification
-Interrupt a representative workflow and verify safe recovery.
 
-## Related
-See `governance/BOUNDARIES_AND_SSOT.md` for cross-standard ownership.
+A compliant system **MUST** simulate an execution interruption during a multi-step task and demonstrate clean state recovery from a durable checkpoint.

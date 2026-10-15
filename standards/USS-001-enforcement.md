@@ -1,26 +1,34 @@
 # USS-001 — Pragmatic Enforcement
 
-**Status:** Draft specification derived from ratified workshop decision; Operator approval required before normative release.
+**Status:** Normative Standard  
+**Cluster:** Cluster 2 (Execution, Security & Orchestration)  
+**Authority:** The Operator (Product Owner)
 
-**Purpose:** Automate safe, deterministic hygiene; escalate risky actions.
+---
 
-## Rules
-1. **001-01** — Classify actions by reversibility, scope and consequence before execution.
-2. **001-02** — Automatically perform low-risk, deterministic and reversible changes when verification is available.
-3. **001-03** — Require authorization for normative changes, irreversible deletion, sensitive permissions and cross-system effects.
-4. **001-04** — Preserve an audit trail for meaningful automated changes.
-5. **001-05** — When risk cannot be determined, stop and request review.
+## Purpose
 
-## Prohibited
-- No universal approval gate for trivial reversible edits.
-- Never bypass a higher-risk approval by splitting work into small operations.
+Automate safe, deterministic hygiene operations while strictly escalating risky or irreversible actions to appropriate authorization gates.
 
-## Defaults and limits
-- Apply risk-proportionate limits. See `governance/DEFAULTS_AND_TOKEN_BUDGETS.md`. Proposed numbers are **not ratified**.
-- Exceptions require explicit rationale and appropriate authorization.
+---
+
+## Normative Rules
+
+1. **001-01** — An agent or execution harness **MUST** classify proposed actions by reversibility, scope, and consequence according to the unified risk matrix ([patterns/risk-matrix.md](../patterns/risk-matrix.md)) before execution.
+2. **001-02** — An execution harness **SHOULD** automatically permit and execute low-risk, deterministic, and reversible operations (Level 1 and Level 2) when automated verification is available.
+3. **001-03** — Critical operations (Level 4), including normative standard modifications, irreversible file deletions, credential access, and cross-system boundary changes, **MUST** require explicit Operator authorization.
+4. **001-04** — An audit trail **MUST** be preserved for all meaningful automated modifications at Level 2 and Level 3.
+5. **001-05** — When the risk classification of an operation cannot be determined with certainty, the agent **MUST** halt execution and request authorization.
+
+---
+
+## Prohibitions
+
+- Systems **MUST NOT** impose manual approval gates for trivial, reversible edits classified as Level 1.
+- Agents **MUST NOT** bypass higher-risk approval gates by fragmenting a single substantive operation into multiple minor actions.
+
+---
 
 ## Verification
-Demonstrate one safe automated edit and one blocked protected edit.
 
-## Related
-See `governance/BOUNDARIES_AND_SSOT.md` for cross-standard ownership.
+A compliant system **MUST** demonstrate deterministic enforcement by executing one safe automated low-risk operation without human intervention and intercepting one protected high-risk operation with a mandatory authorization halt.
