@@ -1,117 +1,81 @@
 # Universal System Standards (USS)
 
-[![Validation](https://img.shields.io/badge/verification-100%25%20offline-success)](tools/)
-[![License: MIT](https://img.shields.io/badge/License-MIT-blue.svg)](LICENSE)
-[![Standards: BCP 14](https://img.shields.io/badge/Normative-IETF%20BCP%2014-informational)](INDEX.md)
-[![Status: RC](https://img.shields.io/badge/Status-v0.1.0--rc1-orange)](CHANGELOG.md)
-
-**Universal System Standards (USS)** establishes a minimal, uniform technical skeleton across independent AI-agent systems (e.g. Hermes, ATLAS, OMEGA, BI Agent). It defines common wire protocols, trust boundaries, state machines, and verification receipts in Git while preserving complete domain sovereignty for individual systems.
-
----
-
-## Core Architectural Principles
-
-1. **The Minimal Skeleton (Technical Backbone):** USS provides the cross-system invariants required for interoperability, trust, and determinism. It standardizes verification states (`IMPLEMENTED`, `VERIFIED`, `ACCEPTED`), check outcomes (`PASS`, `FAIL`, `CHECK_BLOCKED`, `NOT RUN`), and trust boundaries.
-2. **Domain Sovereignty (No Micromanagement):** USS never dictates internal prompts, tools, or domain-specific instructions. Sizing of `AGENTS.md` is governed by local domain complexity—arbitrary numerical file-length brackets are rejected.
-3. **Zero Live Operational Data:** The standards repository contains solely normative specifications, reference patterns, generic templates, and verification tooling. No live registries, databases, or observation inboxes exist here.
-4. **100% Offline Verifiability:** All standards validation and compliance checks run offline using standard Python 3. No external pip dependencies, central daemons, or mandatory cloud services.
-5. **Decentralized Adoption:** Systems pin an approved cryptographic Git release tag and adopt standards on their own schedule without automatic cross-system rollouts.
+**Current Release:** `v1.0.1`  
+**Status:** **FROZEN — OPERATOR APPROVED** (2026-10-16)  
+**Normative Authority:** One authenticated human Operator per deployment  
+**Canonical Specification:** [`USS_v1.0.1_FROZEN_2026-10-16.md`](USS_v1.0.1_FROZEN_2026-10-16.md)  
+**SHA-256:** `9cb3e0f74d98afff24c572581f0e1ab8b235349ceb4f2b097c15f2b6494ec64e`
 
 ---
 
-## Repository Structure
+## What is USS?
 
-```text
-.
-├── README.md               # Project overview and navigation
-├── AGENTS.md               # Clean agent instructions for USS repository
-├── INDEX.md                # Progressive disclosure index and cross-system definitions
-├── LICENSE                 # MIT License
-├── CHANGELOG.md            # Release history (Keep a Changelog 1.1.0)
-│
-├── governance/             # Normative authority, boundaries, and release mechanics
-│   ├── BOUNDARIES.md       # Roles, boundaries, and Single Source of Truth rules
-│   ├── RELEASE_PROCESS.md  # Cryptographic release signing and verification gates
-│   ├── DECISION_LEDGER.md  # Verbatim 16 ratified workshop decisions (frozen)
-│   └── decisions/          # Architectural Decision Records (MADR format)
-│       └── 0001-gate-0-ratified-baseline.md
-│
-├── standards/              # The 14 normative USS standards (IETF BCP 14)
-│   ├── USS-001-enforcement.md
-│   ├── USS-002-contract.md
-│   ├── USS-003-observations.md
-│   ├── USS-004-documentation.md
-│   ├── USS-005-workspace-hygiene.md
-│   ├── USS-006-knowledge-freshness.md
-│   ├── USS-007-orchestration.md
-│   ├── USS-008-security.md
-│   ├── USS-009-reliability.md
-│   ├── USS-010-verification.md
-│   ├── USS-011-dependencies.md
-│   ├── USS-012-observability.md
-│   ├── USS-013-controlled-independent-adoption.md
-│   └── USS-014-lifecycle.md
-│
-├── patterns/               # Nonmandatory reference engineering patterns
-│   ├── risk-matrix.md      # Unified 4-tier risk classification (L1–L4)
-│   ├── observation-flow.md # Recommended observation formatting & routing
-│   ├── local-projection.md # Consumer adoption and local projection mechanics
-│   └── cost-adaptive-routing.md # Telemetry-driven model cost optimization
-│
-├── templates/              # Clean consumer projection templates
-│   ├── AGENTS.template.md
-│   ├── OBSERVATION.template.md
-│   ├── SYSTEM_ADOPTION.template.md
-│   └── SYSTEM_REGISTRY.template.md
-│
-└── tools/                  # Zero-dependency offline verification tooling
-    ├── uss-validate.py     # Standards and adoption validator (Python 3 stdlib)
-    └── test_validator.py   # Comprehensive validator test suite
-```
+**Universal System Standards (USS) is a lightweight, Operator-owned engineering constitution for independently operating AI systems.**
+
+Its purpose is to make single-Operator AI systems easier to build, verify, govern, understand, and maintain without making them dependent on a new platform or compliance framework.
+
+USS prevents:
+- Repeated reinvention of engineering conventions
+- False `IMPLEMENTED`, `VERIFIED`, and `ACCEPTED` claims
+- Drift in instructions and sources of truth
+- Lost task context
+- Unnecessary manual approvals for safe work
+- Accumulation of unmanaged temporary files
+
+### Core Principle: Zero Mandatory Runtime Dependencies
+USS standardizes **required outcomes and behavioral contracts**, not a specific implementation or orchestration framework:
+- **No** new runtime framework, agent CLI, or compliance proxy
+- **No** persistent memory database, central telemetry daemon, or run registry
+- **No** janitor daemons, lease managers, or universal TTL garbage collectors
+- **No** mandatory folder hierarchies, compulsory templates, or rigid token targets
+
+A participating system must continue running with its native runtime, OS and Git permissions, tests, code, and project facts if all optional USS artifacts disappear.
 
 ---
 
-## Standards Clusters (Progressive Disclosure)
+## Architecture & Document Structure
 
-For efficient agent context management, standards are grouped into four cohesive clusters:
-- **Cluster 1: Foundation & Governance:** [USS-002](standards/USS-002-contract.md), [USS-004](standards/USS-004-documentation.md), [USS-013](standards/USS-013-controlled-independent-adoption.md)
-- **Cluster 2: Execution, Security & Orchestration:** [USS-001](standards/USS-001-enforcement.md), [USS-007](standards/USS-007-orchestration.md), [USS-008](standards/USS-008-security.md)
-- **Cluster 3: Hygiene, Freshness & Dependencies:** [USS-005](standards/USS-005-workspace-hygiene.md), [USS-006](standards/USS-006-knowledge-freshness.md), [USS-011](standards/USS-011-dependencies.md)
-- **Cluster 4: Reliability, Quality & Lifecycle:** [USS-009](standards/USS-009-reliability.md), [USS-010](standards/USS-010-verification.md), [USS-012](standards/USS-012-observability.md), [USS-014](standards/USS-014-lifecycle.md)
+The full text is contained in [`USS_v1.0.1_FROZEN_2026-10-16.md`](USS_v1.0.1_FROZEN_2026-10-16.md):
 
-See [INDEX.md](INDEX.md) for full summaries and cross-standard invariants.
+### Part I: Six Constitutional Principles (Normative)
+- **USS-U1 — Operator authority and non-self-amendment:** Only the human Operator establishes or revises policy, standing permissions, and acceptance criteria. Agents cannot grant themselves authority. Discloses `SHARED_TRUST` where true isolation does not exist.
+- **USS-U2 — Real boundaries, downstream effects and injection risk:** Authorization is the intersection of the Operator grant and effective runtime/OS capabilities. Prompting modes (`yolo`, `always-ask`) are not OS containment or egress control. Injection is a capability problem.
+- **USS-U3 — Truthful and minimal guidance; untrusted context stays data:** Provide concise, discoverable repository facts. External inputs, skills, scratch, and observations remain untrusted data. Zero secrets in documentation or logs.
+- **USS-U4 — Evidence-bound claims and Operator acceptance:** Strict distinction between `IMPLEMENTED` (code exists), `VERIFIED` (executed checks passed on identified state), and `ACCEPTED` (Operator decision). Passing weakened checks does not satisfy original requirements.
+- **USS-U5 — Static AUDIT and minimal BOOTSTRAP:** By default, AUDIT is static and read-only without side effects. BOOTSTRAP inspects first and applies only the smallest authorized change. Zero compliance theater.
+- **USS-U6 — Intentional file lifecycle and minimalism:** Automatic deletion is strictly self-cleanup of a run's privately owned temporary directory. Never delete other runs' outputs, registered worktrees, or unknown files. Zero mandatory runtime dependencies.
 
----
+### Part II: Seven Conditional Operational Standards (Normative When Applicable)
+- **SLOT-01 — Repository Orientation / `AGENTS.md`:** Brief, current factual instructions with entrypoints and local SSOT. No mandatory template or length limit.
+- **SLOT-02 — Agent Skills and Tool Contracts:** Prefer public Agent Skills format. `allowed-tools` is pre-approval, not portable denial.
+- **SLOT-03 — Verification and Evidence:** Separate applicability, check outcome (`PASS`, `FAIL`, `CHECK_BLOCKED`, `NOT_RUN`), and work claim. Routine closeout is a short handoff, not automatic receipt files.
+- **SLOT-04 — Bounded Autonomy / T0–T3:**
+  - `T0 (Observe)`: read and bounded inspection — AUTO under grant.
+  - `T1 (Workspace)`: normal edit, format, test, local commit — AUTO under grant.
+  - `T2 (Granted External)`: scoped external action with named resource and credential — AUTO if preauthorized.
+  - `T3 (Reserved)`: authority modification, secret/host privilege change, execution-surface promotion — DENY until scoped Operator authorization.
+- **SLOT-05 — Scratch, Observations and Continuity:** Scratch is transient; observations are rare and attributed. Never store credentials in scratch or evidence.
+- **SLOT-06 — Unified AUDIT / BOOTSTRAP Lite:** Distinguish static conformance, runtime enforcement, and operational evidence.
+- **SLOT-07 — Repository Hygiene and Safe Cleanup:** Purpose-revealing paths; unique per-run temporary directories; preserve evidence before cleanup.
 
-## Offline Validation Tooling
-
-USS ships with a zero-dependency Python 3 validation utility:
-
-### 1. Repository Self-Check:
-Validates rule-ID uniqueness, BCP 14 syntax, internal markdown link integrity, template sanitization, and release tag signatures:
-```bash
-python3 tools/uss-validate.py --self
-```
-
-### 2. Consumer Repository Adoption Check:
-Validates that an adopting system repo correctly pins a version, defines status, provides verifiable local evidence (anti-fabrication check), and scaffolds `AGENTS.md`:
-```bash
-python3 tools/uss-validate.py --consumer /path/to/consumer/repo
-```
-
-### 3. Run Test Suite:
-Executes unit tests covering positive and negative validation scenarios:
-```bash
-python3 tools/test_validator.py
-```
+### Non-Normative Appendices
+- **Appendix A — Reading Guide:** Definitions of evaluation axes (Applicability, Outcome, Work claim, Integration, Boundary disclosure).
+- **Appendix B — OMEGA / ATLAS Pilot Lessons:** Real-world audit insights that informed v1.0.1 clarifications.
 
 ---
 
-## Governance & Release Authority
+## Evaluation Vocabulary
 
-- **Product Owner & Sole Normative Authority:** The Operator.
-- **Independent Implementer:** OMP (Orca ADE).
-- **Operational Consumers:** Hermes, ATLAS, OMEGA, BI Agent.
-- **Release Verification:** Official normative releases require a cryptographically signed Git tag (`git tag -s vX.Y.Z`) created by the Operator. Unsigned tags are non-normative drafts.
+| Axis | Values | Meaning |
+|---|---|---|
+| **Applicability** | `APPLICABLE`, `NOT_APPLICABLE [reason]` | An absent trigger is not a PASS |
+| **Check Outcome** | `PASS`, `FAIL`, `CHECK_BLOCKED`, `NOT_RUN` | Blocked or unrun is not success |
+| **Work Claim** | `IMPLEMENTED`, `VERIFIED`, `ACCEPTED` | Code authored vs. tests run vs. human sign-off |
+| **Integration** | `INTEGRATED UNDER GRANT [id]` | Preauthorized integration is not Operator acceptance |
+| **Boundary** | `ENFORCED [tested scope]`, `UNVERIFIED`, `SHARED_TRUST` | Configuration is not proof of security |
 
-See [governance/BOUNDARIES.md](governance/BOUNDARIES.md) and [governance/RELEASE_PROCESS.md](governance/RELEASE_PROCESS.md) for full governance specifications.
+---
+
+## License
+
+MIT License — see [LICENSE](LICENSE) for details.
